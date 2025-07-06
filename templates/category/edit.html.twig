@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}<h1 class="title">Modifier la catégorie"{{category.name}}"</h1>{% endblock %}
+
+{% block body %}
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_admin') }}">Back office</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('app_category_index') }}">Gestion des catégories</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Modifier</li>
+        </ol>
+    </nav>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+   <input type="submit" value="Validez" class="btn btn-dark w-100 mt-3">
+{{ form_end(form) }}
+    
+
+{% endblock %}

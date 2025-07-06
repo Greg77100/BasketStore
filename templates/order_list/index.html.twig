@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OrderList index{% endblock %}
+
+{% block body %}
+    <h1>OrderList index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for order_list in order_lists %}
+            <tr>
+                <td>{{ order_list.id }}</td>
+                <td>{{ order_list.quantity }}</td>
+                <td>{{ order_list.price }}</td>
+                <td>
+                    <a href="{{ path('app_order_list_show', {'id': order_list.id}) }}">show</a>
+                    <a href="{{ path('app_order_list_edit', {'id': order_list.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_order_list_new') }}">Create new</a>
+{% endblock %}

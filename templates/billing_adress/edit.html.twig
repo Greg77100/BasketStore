@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}<h1 class="title">Modifier une adresse de facturation</h1>{% endblock %}
+
+{% block body %}
+    
+
+    {{ include('billing_adress/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_billing_adress_index') }}">back to list</a>
+
+    {{ include('billing_adress/_delete_form.html.twig') }}
+{% endblock %}

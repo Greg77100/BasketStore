@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}<h1 class="title">Mes commandes</h1>{% endblock %}
+
+{% block body %}
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_account') }}">Mon compte</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Mes commandes</li>
+        </ol>
+    </nav>
+    
+
+    {% if orders is empty %}
+        <p>Aucune commande validée pour le moment.</p>
+    {% else %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>Montant</th>
+                    <th>Statut</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td>#{{ order.id }}</td>
+                        <td>{{ order.dateOrder|date('d/m/Y') }}</td>
+                        <td>{{ order.totalOrder|number_format(2, ',', ' ') }} €</td>
+                        <td>{{ order.statutOrder }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

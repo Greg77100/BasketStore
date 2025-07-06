@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}<h1 class="title">Paiement de la commande</h1>{% endblock %}
+
+{% block body %}
+    <div class="d-flex flex-col md:flex-row gap-6 my-8 ">
+        <div class="flex-1 md:flex-[2] border rounded-lg p-4 w-50 ">
+            <h2 class="text-xl font-bold mb-4">Récapitulatif de la commande</h2>
+            <ul>
+            <strong>Numéro :</strong> {{ order.id }}</strong><br>
+            {% for item in orderItems %}
+                <li class="mb-3">
+                    
+                    <strong>{{ item.product.title }}</strong><br>
+                    Quantité : {{ item.quantity }}<br>
+                    Prix unitaire : {{ item.product.price|number_format(2, ',', ' ') }} €
+                </li>
+            {% endfor %}
+            </ul>
+            <hr class="my-4">
+            <p class="text-lg font-semibold">Total TTC : {{ payment.amount|number_format(2, ',', ' ') }} €</p>
+        </div>
+        <div class="d-flex-1 border rounded-lg p-4 w-50">
+            <h2 class="text-xl font-bold mb-4">Choisissez votre méthode de paiement</h2>
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            
+            
+            <div class="payment-methods">
+            {% for choice in form.paymentMethod %}
+                <label class="payment-option">
+            {{ form_widget(choice, { label: false }) }}
+            {% set value = choice.vars.value %}
+
+            {% if value == 'cb' %}
+                <img src="{{ asset('image/icons/Logo CB Visa Mastercard.png') }}" alt="{{ choice.vars.label }}">
+            {% elseif value == 'paypal' %}
+                <img src="{{ asset('image/icons/paypal.png') }}" alt="{{ choice.vars.label }}">
+            {% elseif value == 'apple_pay' %}
+                <img src="{{ asset('image/icons/apple-pay.jpg') }}" alt="{{ choice.vars.label }}">
+            {% elseif value == 'bank_transfer' %}
+                
+            {% endif %}
+
+            <span>{{ choice.vars.label }}</span>
+                </label>
+            {% endfor %}
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mt-4">
+                Valider le paiement
+            </button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+        
+            
+           

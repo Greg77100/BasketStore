@@ -1,0 +1,81 @@
+{% extends "base.html.twig" %}
+
+{% block h1 %}<h1 class="title">{{ product.title }}</h1>{% endblock %}
+
+{% block body %}
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_admin') }}">Back office</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('app_product_index') }}">Gestion des produits</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Fiche</li>
+        </ol>
+    </nav>
+
+
+    <table class="table table-striped table-hover table-bordered text-center mt-4">
+
+        <tr>
+            <th>ID</th>
+            <td>{{ product.id}}</td>
+        </tr>
+        <tr>
+            <th>Titre</th>
+            <td>{{ product.title|capitalize}}</td>
+        </tr>
+        <tr>
+            <th>Prix</th>
+            <td>{{ product.price}} €</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>
+                {% if product.description %}
+                    {{ product.description }}
+                {% else %}
+                    <span class="text-warning fst-italic">Non renseignée</span>
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <th>Catégorie</th>
+            <td>
+                {% if product.category %}
+                    <a href="{{ path('app_category_show', {'id' : product.category.id }) }}" class="text-dark">{{ product.category.name|capitalize }}</a>
+                {% else %}
+                    {{ ux_icon('lucide:beer-off', {class : 'text-danger icon'}) }}
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <th>Marque</th>
+            <td>
+                {% if product.brand %}
+                    <a href="{{ path('app_brand_show', {'id' : product.brand.id }) }}" class="text-dark">{{ product.brand.name }}</a>
+                {% else %}
+                    {{ ux_icon('lucide:beer-off', {class : 'text-danger icon'}) }}
+                {% endif %}
+            </td>
+        </tr>
+
+        
+    
+    </table>
+
+    {#
+        Dans l'objet product il y a des propriétés telles que :
+
+        - id, title, price, description 
+            syntaxe objet.property : exemple : product.title
+
+        - Propriétés relationnelles
+            - One => Objet.Objet.propriété exemple : product.category.name 
+            - Many => Objet.Objets est un tableau 
+                product.materials est un tableau d'objets materials
+
+    
+    #}
+
+{% endblock %}

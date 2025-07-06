@@ -1,0 +1,58 @@
+{% extends "base.html.twig" %}
+
+{% block h1 %}<h1 class="title">Catalogue</h1>{% endblock %}
+
+{% block body %}
+
+<div class="row mt-5">
+    {% for product in products %}
+        <div class="col-xl-3 col-lg-4 col-md-6 mb-3 mt-8  ">
+            <div class="shadowBart rounded text-center bg-white p-4 mx-2 position-relative h-100 d-flex flex-column justify-content-between product-card">
+
+                <!-- Wishlist -->
+                <form action="{{ path('wishlist_toggle', {id: product.id}) }}" method="post"
+                      class="position-absolute wishlist-form" data-product-id="{{ product.id }}">
+                    <button type="submit" class="wishlist-btn border-0 bg-transparent p-0">
+                        <i class="{% if product.id in wishlistProductIds %}fas active{% else %}far{% endif %} fa-heart"></i>
+                    </button>
+                </form>
+
+                <!-- Title -->
+                <h2 class="h5">{{ product.title|capitalize }}</h2>
+
+                <!-- Image -->
+                <div class="img-wrapper my-2">
+                    {% if product.picture %}
+                        <img src="{{ asset('image/product/' ~ product.picture) }}" alt="" class="img-fluid product-img">
+                    {% else %}
+                        <img src="{{ asset('image/defaut.webp') }}" alt="" class="img-fluid product-img">
+                    {% endif %}
+                </div>
+
+                <!-- Marque -->
+                {% if product.brand %}
+                    <p class="fst-italic bold mt-1">{{ product.brand.name|upper }}</p>
+                {% endif %}
+
+                <!-- Prix -->
+                <p class="text-end mt-3 size20">{{ product.price|number_format(2, '.', ',') }} €</p>
+
+                <!-- Boutons -->
+                <div class="d-flex justify-content-center gap-2 mt-auto">
+                    <a href="{{ path('cart_add', {'id' : product.id }) }}"
+                       class="parallelogram-btn"
+                       title="Ajouter au panier">
+                        <li class="fas fa-shopping-cart"></li>
+                    </a>
+                    <a href="{{ path('app_catalog_product', {'id' : product.id }) }}"
+                       class="parallelogram-btn"
+                       title="Voir le produit">
+                        <li class="fas fa-eye"></li>
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

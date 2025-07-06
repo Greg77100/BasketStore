@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}<h1 class="title">Adresse de livraison des commandes</h1>{% endblock %}
+
+{% block body %}
+    
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_admin') }}">Back office</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Adresse de livraison des commandes</li>
+        </ol>
+    </nav>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom+Prenom</th>
+                <th>Adresse</th>
+                <th>Ville</th>
+                <th>Code Postal</th>
+                <th>Télephone</th>
+                <th>Date de création</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for shipping_adress_order in shipping_adress_orders %}
+            <tr>
+                <td>{{ shipping_adress_order.id }}</td>
+                <td>{{ shipping_adress_order.fullName }}</td>
+                <td>{{ shipping_adress_order.streetAdress }}</td>
+                <td>{{ shipping_adress_order.city }}</td>
+                <td>{{ shipping_adress_order.postalCode }}</td>
+                <td>{{ shipping_adress_order.phone }}</td>
+                <td>{{ shipping_adress_order.createdAt ? shipping_adress_order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_shipping_adress_order_show', {'id': shipping_adress_order.id}) }}"
+                    style="text-decoration: none; color: inherit;">
+                    👀
+                    </a>
+                    <a href="{{ path('app_shipping_adress_order_edit', {'id': shipping_adress_order.id}) }}"
+                    style="text-decoration: none; color: inherit;">
+                    ✏️
+                    </a>
+                    <form method="post" action="{{ path('app_shipping_adress_order_delete', {'id': shipping_adress_order.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer cette adresse de commande ?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ shipping_adress_order.id) }}">
+                        <button class="btn btn-danger">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   
+{% endblock %}

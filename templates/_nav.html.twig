@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg bg-dark custom-navbar">
+
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ path('app_home') }}">BasketStore</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_catalog') }}">Catalogue</a>
+                </li>
+
+                {% if app.user and is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_admin') }}">Back office</a>
+                    </li>
+                {% endif %}
+            </ul>
+
+            <!-- MENU À DROITE app.session.get('cart')|length-->
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    {% if app.user %}
+                    <li class="nav-item me-3 mb-2">
+                        <a href="{{ path('wishlist_index') }}" class="cart-icon">
+                        <span class="menu-icon">
+                            <img src="{{ asset('image/wishlist.png') }}" alt="wishlist" width="35">
+                        </span>
+                        <span class="menu-text">Wishlist</span>
+                        </a>
+                        
+                    </li>
+                    {% endif %}
+                    <li class="nav-item me-3 mb-2">   
+                        <a href="{{ path('cart_index') }}" class="cart-icon">
+                        <span class="menu-icon">
+                        <img src="{{ asset('image/cart.png') }}" alt="Panier" width="35">
+                        <span class="cart-count"> {{ cart_count() }}</span>
+                        </span>
+                        <span class="menu-text">Panier</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown me-3 mb-2" id="accountDropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarAccount"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                            <span class="menu-icon d-none d-lg-inline">
+                                <img src="{{ asset('image/athlete.png') }}" alt="Compte" height="30">
+                            </span>
+                            <span class="menu-text d-lg-none" style="padding-left: 0px;">Compte</span>
+                        </a>
+                        <ul class="dropdown-menu  " aria-labelledby="navbarAccount">
+                            {% if not app.user %}
+                                <li><a class="dropdown-item" href="{{ path('app_login') }}">Connexion</a></li>
+                            {% else %}
+                                <li><a class="dropdown-item" href="{{ path('app_account', {'id': app.user.id}) }}">Mon Compte</a></li>
+                                <li><a class="dropdown-item"  href="{{ path('app_logout') }}">Se déconnecter</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</nav>

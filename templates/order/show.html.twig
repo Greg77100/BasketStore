@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}<h1 class="title">Commande</h1>{% endblock %}
+
+{% block body %}
+    
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Numéro de commande</th>
+                <td>N°{{ order.id }}</td>
+            </tr>
+            <tr>
+                <th>Total de la commande</th>
+                <td>{{ order.totalOrder }} €</td>
+            </tr>
+            <tr>
+                <th>Statut de la commande</th>
+                <td>{{ order.statutOrder }}</td>
+            </tr>
+            <tr>
+                <th>Date de la commande</th>
+                <td>{{ order.dateOrder ? order.dateOrder|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+            <th>Détail de la commande</th>
+            <td>
+        <ul>
+            {% for line in order.orderList %}
+                <li>{{ line.product.title }} - {{ line.quantity }} x {{ line.product.price|number_format(2, ',', ' ') }} €</li>
+            {% else %}
+                <li>Aucun produit</li>
+            {% endfor %}
+        </ul>
+    </td>
+            </tr>
+            <tr>
+            <th>Adresse de livraison de la commande</th>
+            <td>
+            {% if order.shippingAdressOrder %}
+            {{ order.shippingAdressOrder.fullname }}<br>
+            {{ order.shippingAdressOrder.streetadress }}<br>
+            {{ order.shippingAdressOrder.postalcode }} {{ order.shippingAdressOrder.city }}<br>
+            {{ order.shippingAdressOrder.phone }}
+        {% else %}
+            <em>Aucune adresse renseignée</em>
+        {% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+{% endblock %}

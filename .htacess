@@ -1,0 +1,69 @@
+# Active le moteur de réécriture d'URL
+RewriteEngine on
+
+# 🔹 Forcer l'utilisation de HTTPS
+RewriteCond %{HTTPS} !=on
+RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# Définit la base des réécritures d'URL
+RewriteBase /
+
+# 🔹 Règle 1 : Rediriger toutes les requêtes contenant "/public/" dans l'URL
+# Cela évite que l'utilisateur voit "/public/" dans l'URL lorsqu'il accède au site.
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /public/.*\ HTTPS/
+RewriteRule ^/(.*)$ uxseo.fr/$1 [R=301,L]
+
+# 🔹 Règle 2 : Redirection de www vers non-www
+# Si l'utilisateur tape "www.uxseo.fr", il sera redirigé vers "uxseo.fr"
+RewriteCond %{HTTP_HOST} ^www\.uxseo\.fr [NC]
+RewriteRule ^(.*)$ https://uxseo.fr/$1 [R=301,L]
+
+# 🔹 Règle 3 : Réécrire les URLs pour éviter d'afficher "/public/"
+# Si l'URL ne contient pas déjà "/public/", elle est réécrite pour pointer vers ce dossier
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ /public/$1 [L]
+
+# 🔹 Gestion des fichiers et réécriture des requêtes non existantes vers index.php
+<IfModule mod_rewrite.c>
+    Options -MultiViews
+    RewriteEngine On
+
+    # Si le fichier demandé n'existe pas, on redirige tout vers "index.php"
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ index.php [QSA,L]
+
+    # Empêche la réécriture du fichier robots.txt
+    RewriteRule ^robots.txt - [L]
+</IfModule>
+
+# 🔹 Gestion des redirections si mod_rewrite n'est pas disponible
+<IfModule !mod_rewrite.c>
+    <IfModule mod_alias.c>
+        RedirectMatch 302 ^/$ /index.php/
+    </IfModule>
+</IfModule>
+
+# 🔹 Configuration des en-têtes de sécurité
+<IfModule mod_headers.c>
+    # Politique de Referrer (limite l'envoi des informations de la page précédente)
+    Header set Referrer-Policy "same-origin"
+
+    # Sécurisation contre les attaques de type man-in-the-middle
+    Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+    # Protection contre les attaques MIME sniffing
+    Header set X-Content-Type-Options "nosniff"
+
+    # Protection contre le Clickjacking
+    Header set X-Frame-Options "SAMEORIGIN"
+
+    # Protection contre les attaques XSS (Cross-Site Scripting)
+    Header set X-XSS-Protection "1; mode=block"
+
+    # Politique de permissions pour certaines fonctionnalités (géolocalisation, micro)
+    Header set Permissions-Policy "geolocation=self https://uxseo.fr; microphone"
+
+    # Politique de sécurité pour le partage des ressources entre sites
+    Header set Cross-Origin-Opener-Policy "same-origin|same-origin-allow-popups|unsafe-none; report-to=default"
+    Header set Cross-Origin-Embedder-Policy-Report-Only "unsafe-none|require-corp; report-to=default"
+</IfModule>

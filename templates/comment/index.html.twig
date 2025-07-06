@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}<h1 class="title">Commentaires en attente</h1>{% endblock %}
+
+{% block body %}
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_admin') }}">Back office</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Gestion des commentaires</li>
+        </ol>
+    </nav>
+
+    <table class="table table-striped table-hover table-bordered text-center mt-4">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Utilisateur</th>
+                <th>Produit</th>
+                <th>Message</th>
+                <th>Date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+            <tr>
+                <td>{{ comment.id }}</td>
+                <td>
+                    {% if comment.user %}
+                        {{ comment.user.email }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if comment.product %}
+                        {{ comment.product.title }}
+                    {% endif %}
+                </td>
+                <td>{{ comment.message }}</td>
+                <td>{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                
+                
+                <td>
+                    <a href="{{ path('app_comment_show', {'id': comment.id}) }}">show</a>
+                    <a href="{{ path('app_comment_edit', {'id': comment.id}) }}">Accepter</a>
+                    {% include "comment/_delete_form.html.twig" %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucun résultat</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

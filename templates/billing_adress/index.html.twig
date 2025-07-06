@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}<h1 class="title">Listing adresse de facturation</h1>{% endblock %}
+
+{% block body %}
+    
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom+Prenom</th>
+                <th>Adresse</th>
+                <th>Ville</th>
+                <th>CodePostal</th>
+                <th>Téléphone</th>
+                <th>Date de création</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for billing_adress in billing_adresses %}
+            <tr>
+                <td>{{ billing_adress.id }}</td>
+                <td>{{ billing_adress.fullName }}</td>
+                <td>{{ billing_adress.streetAdress }}</td>
+                <td>{{ billing_adress.city }}</td>
+                <td>{{ billing_adress.postalCode }}</td>
+                <td>{{ billing_adress.phone }}</td>
+                <td>{{ billing_adress.createdAt ? billing_adress.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_billing_adress_show', {'id': billing_adress.id}) }}">show</a>
+                    <a href="{{ path('app_billing_adress_edit', {'id': billing_adress.id}) }}">edit</a>
+                     <form method="post" action="{{ path('app_billing_adress_order_delete', {'id': billing_adress_order.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer cette adresse de facturation ?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ billing_adress_order.id) }}">
+                        <button class="btn btn-danger">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

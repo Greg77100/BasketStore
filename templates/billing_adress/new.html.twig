@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}<h1 class="title">Nouvelle adresse de facturation</h1>{% endblock %}
+
+{% block body %}
+    
+
+    {{ include('billing_adress/_form.html.twig') }}
+
+    <a href="{{ path('app_billing_adress_index') }}">back to list</a>
+{% endblock %}

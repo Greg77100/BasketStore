@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+{% block h1 %}<h1 class="title">Back office / Gestionnaire</h1>{% endblock %}
+
+
+
+{% block body %}
+    <div class="row mt-5">
+        <div class="col-md-3 mb-3  ">
+            <div class="card text-center shadow mx-2 ">
+                <div class="card-body">
+                    <h5 class="card-title">Produits</h5>
+                    <p class="card-text">Gérez vos produits</p>
+                    <a href="{{ path('app_product_index') }}" class="btn btn-dark">Voir</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-center shadow mx-2">
+                <div class="card-body">
+                    <h5 class="card-title">Categories</h5>
+                    <p class="card-text">Gérez vos catégories</p>
+                    <a href="{{ path('app_category_index') }}" class="btn btn-dark">Voir</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-center shadow mx-2">
+                <div class="card-body">
+                    <h5 class="card-title">Marques</h5>
+                    <p class="card-text">Gérez vos marques</p>
+                    <a href="{{ path('app_brand_index') }}" class="btn btn-dark">Voir</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-center shadow mx-2">
+                <div class="card-body">
+                    <h5 class="card-title">Promotions</h5>
+                    <p class="card-text">Gérez vos promotions</p>
+                    <a href="{{ path('app_promotion_index') }}" class="btn btn-dark">Voir</a>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <div class="col-md-3">
+            <div class="card text-center shadow mx-2">
+                <div class="card-body">
+                    <h5 class="card-title">Commandes</h5>
+                    <p class="card-text">Gérez vos commandes</p>
+                    <a href="{{ path('app_order_index') }}" class="btn btn-dark">Voir</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-center shadow mx-2">
+                <div class="card-body">
+                    <h5 class="card-title">Livraison des commandes</h5>
+                    <p class="card-text">Gérez vos adresses de livraison</p>
+                    <a href="{{ path('app_shipping_adress_order_index') }}" class="btn btn-dark">Voir</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-center shadow mx-2">
+                <div class="card-body">
+                    <h5 class="card-title">Facture des commandes</h5>
+                    <p class="card-text">Gérez vos factures</p>
+                    <a href="{{ path('app_billing_adress_order_index') }}" class="btn btn-dark">Voir</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card text-center shadow mx-2">
+                <div class="card-body">
+                    <h5 class="card-title">Gestion des promotions</h5>
+                    <p class="card-text">Gérez vos produits en promotion</p>
+                    <a href="{{ path('app_promotion_manage') }}" class="btn btn-dark">Voir</a>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-md-3 mb-3">
+            <div class="card text-center shadow mx-2">
+                <div class="card-body">
+                    <h5 class="card-title">Commentaires</h5>
+                    <p class="card-text">Gérez vos commentaires</p>
+                    <a href="{{ path('app_comment_index') }}" class="btn btn-dark">Voir</a>
+                </div>
+            </div>
+        </div>
+    </div>        
+{% endblock %}

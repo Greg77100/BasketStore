@@ -1,0 +1,5 @@
+security:
+    Invalid credentials: "Identifiants invalides."
+    Username could not be found: "Nom d'utilisateur introuvable."
+    Account is disabled: "Le compte est désactivé."
+    Account is locked: "Le compte est verrouillé."

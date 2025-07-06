@@ -1,0 +1,113 @@
+{% extends "base.html.twig" %}
+
+{% block h1 %}<h1 class="title">Gestion des produits ({{products|length}})</h1>{% endblock %}
+
+{% block body %}
+
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_admin') }}">Back office</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Gestion des produits</li>
+        </ol>
+    </nav>
+
+    <a class="btn btn-dark" href="{{ path('app_product_new') }}">Ajouter un produit</a>
+
+    <table class="table table-striped table-hover table-bordered text-center mt-4">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prix (€)</th>
+                <th>Description</th>
+                <th>Catégorie</th>
+                <th>Marque</th>
+                <th>Stock</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+           
+            {% for product in products %}
+                <tr class="align-middle">
+                    <td>{{ product.id }}</td>
+                    {# 
+                        filters   
+                        syntaxe : name|filter
+
+
+                        capitalize : 1e lettre en majuscule
+                        lower : tout en minuscule
+                        upper : tout en majuscule
+                        length : calcul une string ou un array
+                        slice : retourner une partie de la string (1e arg : position, 2e arg : quantité)
+
+
+                        ~ : le tilde est la concaténation en twig
+                    #}
+                    <td>
+                    <a href="{{ path('app_product_show', {'id' : product.id }) }}" class="text-dark">{{ product.title|capitalize }}</td>
+                    <td>{{ product.price|number_format(2, '.', ',') }}€</td>
+                    <td>
+                        {# {% if product.description is not empty %} #}
+                        {% if product.description %}
+           
+                            {% if product.description|length > 30 %}
+                                {{ product.description|slice(0,27) ~ '...' }}
+                            {% else %}
+                                {{ product.description }}
+                            {% endif %}
+
+                        {% else %}
+                            <span class="text-warning fst-italic">Non renseignée</span>
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% if product.category %}
+                            <a href="{{ path('app_category_show', {'id' : product.category.id }) }}" class="text-dark">{{ product.category.name|capitalize }}</a>
+                        {% else %}
+                            {{ ux_icon('iconoir:xmark', {class : 'text-danger icon'}) }}
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% if product.brand %}
+                            <a href="{{ path('app_brand_show', {'id' : product.brand.id }) }}" class="text-dark">{{ product.brand.name|capitalize }}</a>
+                        {% else %}
+                            {{ ux_icon('iconoir:xmark', {class : 'text-danger icon'}) }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ product.stock }}
+                    </td>
+                    <td>
+                        <a href="{{ path('app_product_show', {'id' : product.id }) }}"
+                        style="text-decoration: none; color: inherit;">
+                            👀
+                        </a>
+
+                        <a href="{{ path('app_product_edit', {'id' : product.id }) }}"
+                        style="text-decoration: none; color: inherit;">
+                            ✏️
+                        </a>
+
+                        <a 
+                            href="{{ path('app_product_delete', {'id' : product.id }) }}"
+                            onclick="return confirm('Etes-vous sûr de vouloir supprimer ce produit ?')"
+                            style="text-decoration: none; color: inherit;">
+                            🗑️
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">Aucun résultat</td>
+                </tr>  
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

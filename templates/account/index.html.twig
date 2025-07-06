@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}<h1 class="title">Mon Compte</h1>{% endblock %}
+
+{% block body %}
+        <div class="account-container d-flex">
+            <!-- Sidebar -->
+            <div class="sidebar p-3">
+                <h5>Mon Compte</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a href="{{ path('app_account_orders') }}" class="nav-link text-black">Mes commandes</a></li>
+                    <li class="nav-item"><a href="{{ path('wishlist_index') }}" class="nav-link text-black">Ma liste d’envies</a></li>
+                    <li class="nav-item"><a href="{{ path('app_comment_mine', {'id': user.id }) }}" class="nav-link text-black">Mes avis produit</a></li>
+                    <li class="nav-item"><a href="{{ path('app_logout') }}" class="nav-link text-black">Déconnexion</a></li>
+                </ul>
+            </div>
+
+            <!-- Contenu principal -->
+            <div class="main-content p-4 flex-grow-1">
+                <div class="d-flex gap-4 mb-4">
+                    <div class="box  flex-fill">
+                        <h4>Informations du contact</h4>
+                        <p>Nom : {{ user.lastName }}</p>
+                        <p>Prénom : {{ user.firstName }}</p>
+                        <p>Email : {{ user.email }}</p>
+                        <a href="{{ path('app_account_infos', {'id': user.id}) }}">Modifier vos informations</a>
+                        |
+                        <a href="{{ path('app_account_password_edit', {'id': user.id}) }}">Modifier votre mot de passe</a>
+
+                    </div>
+            
+                    <div class="box flex-fill">
+                        <h4>Lettres d'informations</h4>
+                        {% if isSubscribedToNewsletter %}
+                            <div class="alert alert-success">
+                                ✅ Vous êtes inscrit à la newsletter.
+                            </div>
+                            <form method="post" action="{{ path('app_account_newsletter_unsubscribe') }}">
+                                <button type="submit" class="btn btn-warning">Se désinscrire</button>
+                            </form>
+                        {% else %}
+                            <div class="alert alert-info">
+                                📧 Vous n'êtes pas encore inscrit à la newsletter.
+                            </div>
+                            <form method="post" action="{{ path('app_account_newsletter_subscribe') }}">
+                                <button type="submit" class="btn btn-primary">S’inscrire</button>
+                            </form>
+                        {% endif %}
+
+                    </div>
+                </div>
+            <hr>
+                <div class="main-content p-4 flex-grow-1">
+                    <h4>Adresses</h4>
+                    <div class="d-flex gap-4 mb-4">
+                        
+                            <div class="box flex-fill">
+                                <h5>Adresse de livraison</h5>
+                                {% if shippingAdresses is empty %}
+                                    <p>Vous n'avez pas encore d'adresse de livraison.</p>
+                                {% else %}
+                                    {% for shippingAdress in shippingAdresses %}
+                                        <div class="adresse-box">
+                                            <p>Nom : {{ shippingAdress.fullName }}</p>
+                                            <p>Adresse : {{ shippingAdress.streetAdress }}</p>
+                                            <p>Ville : {{ shippingAdress.city }}</p>
+                                            <p>Code postal : {{ shippingAdress.postalCode }}</p>
+                                            <p>Téléphone : {{ shippingAdress.phone }}</p>
+
+                                            <a href="{{ path('app_account_shipping_adress_edit', { id: shippingAdress.id }) }}">✏️ Modifier</a>
+
+                                            <form method="post" action="{{ path('app_account_shipping_adress_delete', { id: shippingAdress.id }) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer cette adresse ?');" style="display:inline;">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete_shipping_adress_' ~ shippingAdress.id) }}">
+                                                <button type="submit" class="btn btn-link">🗑️ Supprimer</button>
+                                            </form>
+
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+
+<a href="{{ path('app_account_shipping_adress_add') }}" class="btn btn-primary">➕ Ajouter une nouvelle adresse</a>
+
+                                    
+                            </div>
+                       
+                        
+                            <div class="box flex-fill">
+                                <h5>Adresse de facturation</h5>
+                                {% if billingAdress is empty %}
+                                    <p>Vous n'avez pas encore d'adresse de facturation.</p>
+                                    <a href="{{ path('app_account_billing_adress_add') }}" class="btn btn-primary">➕ Ajouter une nouvelle adresse</a>
+                                {% else %}    
+                                    <p>Nom : {{ billingAdress.fullName }}</p>
+                                    <p>Adresse : {{ billingAdress.streetAdress }}</p>
+                                    <p>Ville : {{ billingAdress.city }}</p>
+                                    <p>Code postal : {{ billingAdress.postalCode }}</p>
+                                    
+                                    <a href="{{ path('app_account_billing_adress_edit') }}">✏️ Modifier </a>
+
+                                    <form method="post" action="{{ path('app_account_billing_adress_delete', { id: billingAdress.id }) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer cette adresse ?');" style="display:inline;">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete_billing_adress_' ~ billingAdress.id) }}">
+                                        <button type="submit" class="btn btn-link">🗑️ Supprimer</button>
+                                    </form>
+                                
+                                {% endif %}
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+
+{% endblock %}
+
+ 

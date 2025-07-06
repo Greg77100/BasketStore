@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}<h1 class="title">Nouvelle commande</h1>{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1 class="mb-4">Créer une nouvelle commande</h1>
+
+        <h2 class="h5">Votre panier :</h2>
+        <table class="table table-sm table-bordered text-center mb-4">
+            <thead class="table-light">
+                <tr>
+                    <th>Produit</th>
+                    <th>Quantité</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart %}
+                    <tr>
+                        <td>{{ item.product.title }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ (item.product.price * item.quantity)|number_format(2, '.', ',') }} €</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <p class="text-end fw-bold">Total : {{ total|number_format(2, '.', ',') }} €</p>
+
+        <div class="card shadow-sm p-4">
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <button type="submit" class="btn btn-success mt-3">Valider la commande</button>
+            {{ form_end(form) }}
+        </div>
+
+        <a href="{{ path('cart_index') }}" class="btn btn-outline-secondary mt-3">← Modifier mon panier</a>
+    </div>
+{% endblock %}
+

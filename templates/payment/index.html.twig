@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}<h1 class="title">Listing des paiements</h1>{% endblock %}
+
+{% block body %}
+
+<table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Total commande</th>
+                <th>Statut commande</th>
+                <th>Date commande</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for payment in payments %}
+            <tr>
+                <td>{{ payment.id }}</td>
+                <td>{{ payment.amount }}</td>
+                <td>{{ payment.statutPayment }}</td>
+                <td>{{ payment.datePayment ? payment.datePayment|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                     {#{{ include('payment/_delete_form.html.twig') }}#}
+                    <form method="post" action="{{ path('app_payment_delete', {'id': payment.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ce paiement ?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ payment.id) }}">
+                        <button class="btn btn-danger">Supprimer</button>
+                    </form>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Auncune donnée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

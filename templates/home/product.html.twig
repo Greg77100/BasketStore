@@ -1,0 +1,68 @@
+{% extends "base.html.twig" %}
+
+
+{% block h1 %}{{ product.title|capitalize }}{% endblock %}          
+
+
+{% block body %}
+
+    <a class="btn btn-dark" href="{{ path('app_catalog') }}">Catalogue</a>
+
+    <div class="shadow p-4 my-4 bg-white">
+        {% if product.picture %}
+            <img src="{{ asset('image/product/' ~ product.picture) }}" alt="" class="imgDefaut">
+        {% else %}
+            <img src="{{ asset('image/defaut.webp') }}" alt="" class="imgDefaut">
+        {% endif %}
+
+    </div>
+
+    <div class="shadow p-4 my-4 bg-white">
+        <h2>Prix : {{ product.price }} €</h2>
+    </div>
+
+    <div class="shadow p-4 my-4 bg-white">
+        <h2>Description : {{ product.description }}</h2>
+    </div>
+
+    <div class="shadow p-4 my-4 bg-white">
+        <h2>Catégorie : {{ product.category.name }}</h2>
+    </div>
+
+    <div class="shadow p-4 my-4 bg-white">
+        <h2>Marque : {{ product.brand.name }}</h2>
+    </div>
+
+    
+
+
+    <div class="shadow p-4 my-4 bg-white">
+        <h2>Les commentaires</h2>
+
+        {% for comment in product.comments|filter(c => c.activation) %}
+            {# {% if comment.activation %} #}
+                <div class="shadow m-3 p-3">
+                    <p>{{ comment.message }}</p>
+                    <p>{{ comment.createdAt|date('d/m/Y H:i') }}</p>
+                    <p>{{ comment.user.firstName }} {{ comment.user.lastName }}</p>
+                </div>
+            {# {% endif %} #}
+        {% else %}
+            <p>Soyez le premier à laisser votre avis</p>
+        {% endfor %}
+
+        {% if app.user %}
+            {{ form_start(form)}}
+
+                {{ form_row(form.message)}}
+
+                <input type="submit" value="Enregistrer mon commentaire" class="btn btn-primary w-100 mt-3">
+
+            {{ form_end(form)}}
+        {% else %}
+            <h2>Veuillez vous connecter pour laisser votre avis</h2>
+        {% endif %}
+    </div>
+
+
+{% endblock %}

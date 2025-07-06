@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}<h1 class="title">{{ promotion.name }}</h1>{% endblock %}
+
+{% block body %}
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_admin') }}">Back office</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('app_promotion_index') }}">Gestion des promotions</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Fiche</li>
+        </ol>
+    </nav>
+    
+
+    <table class="table table-striped table-hover table-bordered text-center mt-4">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ promotion.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ promotion.name|capitalize }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ promotion.description }}</td>
+            </tr>
+            <tr>
+                <th>Remise</th>
+                <td>{{ promotion.discountPercentage }}</td>
+            </tr>
+            <tr>
+                <th>Debut</th>
+                <td>{{ promotion.startDate ? promotion.startDate|date('Y-m-d ') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Fin</th>
+                <td>{{ promotion.endDate ? promotion.endDate|date('Y-m-d ') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+  
+
+    
+{% endblock %}

@@ -1,0 +1,23 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+legal_notices:
+    path: /mentions-legales
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
+    defaults:
+        template: 'legal_notices.html.twig'
+
+cgv:
+    path: /conditions-generales
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
+    defaults:
+        template: 'cgv.html.twig'
+
+privacy_policy:
+    path: /politique-confidentialite
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
+    defaults:
+        template: 'privacy_policy.html.twig'

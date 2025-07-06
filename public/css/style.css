@@ -1,0 +1,411 @@
+/* le code CSS accessible sur toutes les routes */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    
+
+
+}
+
+main {
+    padding-top: 56px;
+    width: 100%;
+    min-height: 500px;
+}
+body{
+    background-color: #ced4da;
+}
+
+
+.title {
+    color: black;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+/*element de la navbar*/
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-link {
+    
+    color: white !important; 
+}
+/* Style général des liens */
+.navbar-nav .nav-link {
+  text-decoration: none;
+  color: black;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+}
+
+
+
+.navbar {
+    position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* pour qu'elle soit au-dessus des autres éléments */
+
+}
+
+/* Cacher le menu par défaut */
+.logoDropdown {
+    display: none;
+    position: absolute;
+    top:100%; /* Ajuste la distance entre le logo et le menu déroulant */
+    top: calc(100% - 2px);
+    max-height: 90px;
+    overflow-y: auto;
+    right: -25px; /* aligne à gauche de l’image */
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 100;
+    min-width: 80px;
+}
+
+
+/* Afficher le menu lors du survol du logo */
+.login-dropdown:hover .logoDropdown {
+    display: block;
+}
+
+/* Styles des liens du menu */
+.logoDropdown a {
+    padding: 2px 2px;
+    color: #333;
+    text-decoration: none;
+    display: block;
+}
+
+.logoDropdown a:hover {
+    background-color: #f8f9fa;
+}
+
+
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+  left: 0;
+  z-index: 1000;
+  min-width: 200px;
+   
+}
+#accountDropdown .dropdown-menu {
+  left: 50%;
+  transform: translateX(-50%);
+  right: auto;
+}
+/* Sélecteur spécifique pour ton menu déroulant */
+#accountDropdown .dropdown-menu  {
+  --bs-dropdown-bg: white;
+  --bs-dropdown-link-color: black;
+  --bs-dropdown-link-hover-color: black;
+  --bs-dropdown-link-hover-bg: #f1f1f1;
+  --bs-dropdown-link-active-color: black;
+  --bs-dropdown-link-active-bg: #e9ecef;
+  background-color: white !important;
+}
+
+
+
+
+
+.cart-icon {
+    position: relative;
+    display: inline-block;
+    right: 15px;
+    text-decoration: none !important;
+}
+
+
+.cart-icon img {
+    width: 30px;
+    height: auto;
+}
+
+.menu-text {
+  display: none;
+}
+.menu-icon {
+  display: inline;
+}
+
+.cart-count {
+    position: absolute;
+    bottom: -10px;
+    right: 0;
+    background: rgb(224, 238, 20);
+    color: rgb(9, 9, 9);
+    font-size: 12px;
+    font-weight: bold;
+    width: 12px;
+    height: 12px;
+    border-radius: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(50%, -50%);
+}
+
+
+.bg-custom {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: url('/image/basketball-6951609.jpg') no-repeat center center !important;
+    background-size: cover !important; /* L’image couvre toute la surface */
+    width: 100% !important;            /* La div prend toute la largeur possible */
+    height: 110vh !important;           /* La div prend toute la hauteur possible */
+    
+}
+
+.navbar-toggler-icon {
+  background-color: white;
+}
+
+
+
+.icon {
+    width: 25px;
+    height: 25px;
+}
+
+
+
+.imgDefaut{
+    height: 50%;
+    width: 30%;
+    display: block;
+    margin: 0 auto;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+
+
+/* changement de couleur des liens du fil d'ariane*/
+
+/* Si vous souhaitez cibler un fil d'Ariane uniquement dans le bloc body */
+body .breadcrumb .breadcrumb-item a {
+    color: rgb(38, 35, 35) !important; /* Couleur personnalisée pour les liens */
+}
+
+body .breadcrumb .breadcrumb-item a:hover {
+    color: white !important; /* Couleur personnalisée pour le survol */
+}
+
+div{
+    display: block;
+    unicode-bidi: isolate;
+}
+
+/* le footer */
+
+.block-content {
+    height: 5vh;
+}
+
+.footer-container {
+    background-color: black;
+}
+
+.newsletter {
+    background-color: #777777;
+    width: 100%;
+}
+
+#footer #newsletter_block_left {
+    overflow: hidden;
+    width: 50%;
+    float: left;
+    padding: 13px 15px 7px 15px;
+    margin-bottom: 0;
+}
+
+.newsletter-form {
+    max-width: 400px;
+    width: 100%;
+}
+
+.input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.newsletter-input {
+    width: 100%;
+    padding: 10px 110px 10px 15px;  /* espace à droite pour le bouton */
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 30px; /* arrondi */
+    box-sizing: border-box;
+}
+
+.btn-inline {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 50%;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-inline:hover {
+    background-color: #0056b3;
+}
+
+.icon-check {
+    width: 18px;
+    height: 18px;
+}
+
+.footer-container #footer #social_block {
+    float: left;
+    width: 50%;
+    padding: 22px 15px 0 15px;
+}
+
+.pull-right {
+    float: right !important;
+}
+
+.social-icons img {
+    width: 30px;  /* Ajuste la taille */
+    height: auto;
+}
+
+.social-icons {
+    list-style: none;  /* Supprime les puces */
+    display: flex;  /* Permet d'aligner en ligne */
+    gap: 15px;  /* Espacement entre les icônes */
+    padding: 0;
+}
+
+.social-icons li {
+    display: inline-block;
+}
+
+.social-icons a {
+    font-size: 24px;  /* Taille des icônes */
+    color: #333;  /* Couleur par défaut */
+    text-decoration: none;
+}
+
+.social-icons a:hover {
+    color: #007bff;  /* Couleur au survol */
+}
+
+#footer a {
+    color: white;
+    text-decoration: none; /* facultatif pour enlever le soulignement */
+}
+
+#footer a:hover {
+    color: grey; /* facultatif : couleur au survol */
+}
+
+/* css de mon compte*/
+
+.sidebar {
+    width: 250px;
+    border-right: 2px solid black; /* ← ligne verticale */
+    min-height: 100%;
+}
+
+.box {
+    background-color: #fefefe;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 50%;
+}
+
+/* css icone catalogue */
+
+.parallelogram-btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 40px;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    transform: skew(-20deg);
+    transition:  all 0.3s ease;
+    border: none;
+    font-size: 18px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+.parallelogram-btn i {
+    transform: skew(20deg);
+}
+
+.parallelogram-btn:hover {
+    background-color: grey;
+    color: white;
+}
+
+.footer-container h2 {
+    color: white;
+}
+
+.product-card {
+  position: relative;
+}
+
+.wishlist-form {
+  bottom: 10px;
+  right: 10px;
+  position: absolute;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.payment-option img {
+    height: 32px;
+}
+
+
+/******************************mediaQuery*****************************************/
+
+@media (max-width: 992px) {
+  img.bg-custom {
+    max-width: 100%;
+    height: 70vh !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .menu-icon {
+    display: none;
+  }
+  .menu-text {
+    display: inline;
+    font-size: 1rem; /* ajuste la taille selon tes besoins */
+    color: white;
+    text-decoration: none;
+    padding-left: 2rem;
+  }
+}

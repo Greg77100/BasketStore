@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}<h1 class="title">Ajouter une promotion</h1>{% endblock %}
+
+{% block body %}
+
+     <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_admin') }}">Back office</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('app_promotion_index') }}">Gestion des promotions</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Ajouter</li>
+        </ol>
+    </nav>
+
+    {{ include('promotion/_form.html.twig') }}
+
+    
+{% endblock %}

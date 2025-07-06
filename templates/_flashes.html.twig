@@ -1,0 +1,16 @@
+{#
+    En twig, il existe une variable d'environnement qui s'appelle app
+    dans app on y trouve les flashes, mais également l'utilisateur connecté ....
+#}
+
+{% for notification in app.flashes('success') %}
+    <div class="alert alert-success text-center p-3 m-2 w-50 mx-auto">
+        {{ notification }}
+    </div>
+{% endfor %}
+
+{% for notification in app.flashes('error') %}
+    <div class="alert alert-danger text-center p-3 m-2 w-50 mx-auto">
+        {{ notification }}
+    </div>
+{% endfor %}

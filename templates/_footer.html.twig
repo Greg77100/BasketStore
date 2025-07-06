@@ -1,0 +1,83 @@
+<div class="footer-container">
+    <footer id="footer" class="container-fluid">
+        <div class="row">
+            <div class="newsletter">
+                <div id="newsletter_block_left" class="block">
+                    <h2>Newsletter</h2>
+                    <div class="block-content">
+                        <form action="{{ path('newsletter_subscribe_from_footer') }}" method="POST" class="newsletter-form">
+                            <div class="input-wrapper">
+                                <input type="email" name="email" class="newsletter-input" placeholder="Veuillez saisir votre email" required>
+                                <input type="hidden" name="referer" value="{{ app.request.uri }}">
+                                <button type="submit" class="btn-inline">
+                                <img src="{{ asset('image/icons/check-mark.png') }}" alt="Valider" class="icon-check">
+                                </button>
+                            </div>
+                        </form>
+    
+                    </div>
+                </div>
+                <section id="social_block" class="pull-right">
+                <h2>Suivez nous</h2>
+                    <ul class="social-icons">
+                        <li><a href="https://facebook.com" target="_blank"><img src="{{ asset('image/icons/facebook.png') }}" alt="Facebook"></a></li>
+                        <li><a href="https://instagram.com" target="_blank"><img src="{{ asset('image/icons/instagram.png') }}" alt="Instagram"></a></li>
+                        <li><a href="https://twitter.com" target="_blank"><img src="{{ asset('image/icons/twitter.png') }}" alt="Twitter"></a></li>
+                    </ul>
+
+                </section>
+            </div>    
+            <section class="blockcategories_footer footer-block col-xs-12 col-sm-2">
+                <h2 >Categories</h2>
+                <div class="category_footer toggle-footer">
+                    <div class="list">
+                        <ul class="dhtml">
+                            <li>
+                            <a href="{{ path('catalogue_category', {id: 2}) }}">ACCESSOIRES D'ENTRAINEMENT</a>
+                            </li>
+                            <li>
+                            <a href="{{ path('catalogue_category', {id: 3}) }}">BALLONS DE BASKET</a>
+                            </li>
+                            <li>
+                            <a href="{{ path('catalogue_category', {id: 5}) }}">BAGAGERIE</a>
+                            </li>
+                            <li>
+                            <a href="{{ path('catalogue_category', {id: 4}) }}">COACH BASKET</a>
+                            </li>
+                            <li>
+                            <a href="{{ path('catalogue_category', {id: 1}) }}">RANGEMENTS</a>
+                            </li>
+                            <li>
+                            <a href="{{ path('catalogue_category', {id: 6}) }}">TEXTILE-CHASUBLES</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section class="various_link footer-block col-xs-12 col-sm-2">
+                <h2>Informations</h2>
+                <ul class="toggle_footer">
+                    <li class="item">
+                    <a href="">Contactez nous</a>
+                    </li>
+                    <li class="item">
+                    <a href="{{ path('cgv') }}">Conditions générales de vente</a>
+                    </li>
+                    <li class="item">
+                    <a href="">Paiements sécurisés</a>
+                    </li>
+                    <li class="item">
+                    <a href="{{ path('legal_notices') }}">Mentions légales</a>
+                    </li>
+                    <li class="item">
+                    <a href="{{ path('privacy_policy') }}">Politique de confidentialité</a>
+                    </li>
+    
+                </ul>
+                </section>
+            <section></section>
+            <section></section>
+                    <p class="text-white small mb-0">&copy; {{ "now"|date("Y") }} BasketStore. Tous droits réservés.</p>
+        </div>
+    </footer>
+</div>

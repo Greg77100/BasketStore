@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ShippingAdressOrder{% endblock %}
+
+{% block body %}
+    <h1>ShippingAdressOrder</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ shipping_adress_order.id }}</td>
+            </tr>
+            <tr>
+                <th>FullName</th>
+                <td>{{ shipping_adress_order.fullName }}</td>
+            </tr>
+            <tr>
+                <th>StreetAdress</th>
+                <td>{{ shipping_adress_order.streetAdress }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ shipping_adress_order.city }}</td>
+            </tr>
+            <tr>
+                <th>PostalCode</th>
+                <td>{{ shipping_adress_order.postalCode }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ shipping_adress_order.phone }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ shipping_adress_order.createdAt ? shipping_adress_order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_shipping_adress_order_index') }}">back to list</a>
+
+    <a href="{{ path('app_shipping_adress_order_edit', {'id': shipping_adress_order.id}) }}">edit</a>
+
+    {{ include('shipping_adress_order/_delete_form.html.twig') }}
+{% endblock %}

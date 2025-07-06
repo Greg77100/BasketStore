@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}<h1 class="title">Modifier la marque"{{brand.name}}" </h1>{% endblock %}
+
+{% block body %}
+    
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_admin') }}">Back office</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('app_brand_index') }}">Gestion des marques</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Modifier</li>
+        </ol>
+    </nav>
+
+    
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="Modifier la marque {{brand.name}}" class="btn btn-dark w-100 mt-3">
+{{ form_end(form) }}
+       
+   
+
+
+    
+    
+
+{% endblock %}

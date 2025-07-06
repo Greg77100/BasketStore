@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}<h1 class="title">Gestion des factures</h1>{% endblock %}
+
+{% block body %}
+    
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_admin') }}">Back office</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Gestion des factures</li>
+        </ol>
+    </nav>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom+Prénom</th>
+                <th>Adresse</th>
+                <th>Ville</th>
+                <th>Code postal</th>
+                <th>Téléhone</th>
+                <th>Date de création</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for billing_adress_order in billing_adress_orders %}
+            <tr>
+                <td>{{ billing_adress_order.id }}</td>
+                <td>{{ billing_adress_order.fullName }}</td>
+                <td>{{ billing_adress_order.streetAdress }}</td>
+                <td>{{ billing_adress_order.city }}</td>
+                <td>{{ billing_adress_order.postalCode }}</td>
+                <td>{{ billing_adress_order.phone }}</td>
+                <td>{{ billing_adress_order.createdAt ? billing_adress_order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_billing_adress_order_show', {'id': billing_adress_order.id}) }}"
+                    style="text-decoration: none; color: inherit;">
+                    👀
+                    </a>
+                    <a href="{{ path('app_billing_adress_order_edit', {'id': billing_adress_order.id}) }}"
+                    style="text-decoration: none; color: inherit;">
+                    ✏️
+                    </a>
+                     <form method="post" action="{{ path('app_billing_adress_order_delete', {'id': billing_adress_order.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer cette facture ?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ billing_adress_order.id) }}">
+                        <button class="btn btn-danger">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Pas de données</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

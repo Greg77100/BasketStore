@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}<h1 class="title">Listing des commandes</h1>{% endblock %}
+
+{% block body %}
+    
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_admin') }}">Back office</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Listing des commandes</li>
+        </ol>
+    </nav>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Total commande</th>
+                <th>Statut commande</th>
+                <th>Date commande</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.totalOrder }}</td>
+                <td>{{ order.statutOrder }}</td>
+                <td>{{ order.dateOrder ? order.dateOrder|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_order_show', {'id': order.id}) }}"
+                    style="text-decoration: none; color: inherit;">
+                    👀
+                    </a>
+                    
+                
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Pas de commande</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}
